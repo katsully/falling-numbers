@@ -13,9 +13,12 @@ void setup() {
   background(0);
   numbers.add(new Number(str(currNum), xValue));
   currNum++;
+  xValue+=20;
   numbers.add(new Number(str(currNum), xValue));
   currNum++;
-  numbers.add(new Number(str(currNum), xValue));
+  xValue += 20;
+  numbers.add(new Number(str(currNum), xValue);
+  xValue+=20;
   
   // Create syphon server to send frames out
   server = new SyphonServer(this, "Processing Spyhon");
@@ -51,18 +54,21 @@ void draw() {
       xValue += 20;
     }
     // add new number at end of line
-    numbers.add(new Number(str(currNum+1), xValue));
-    if (currNum % 3 == ) {
-      currNum+=3;
+    if(currNum % 3 == 0) {
+      for(int i=0; i<3; i++) {
+        numbers.add(new Number(str(currNum+1), xValue));
+        currNum++;
+        xValue += 20;
+      }
     }
   }
   server.sendScreen();
 }
 
-// pause
+// hit P for pause
 void keyPressed() {
   final int k = keyCode;
-  if (k == 'S') {
+  if (k == 'P') {
     if (looping) noLoop();
     else loop();
   }
