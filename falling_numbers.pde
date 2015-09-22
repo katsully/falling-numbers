@@ -46,20 +46,20 @@ void draw(){
     int currSize = numbers.size();
 
     // if currNum divisble by nine insert a break
-    println("conditional statement" + str(currNum % 9 != 0 && startingNum == 1));
+//    println("conditional statement" + str(currNum % 9 != 0 && startingNum == 1));
     println("currNum " + str(currNum));
     println("starting number" + str(startingNum));
-    if (currNum != 9 || startingNum != 1) {
+    if (currNum % 9 != 0 || startingNum != 1) {
       // add new row
       int counter = 0;
       for (int i=startingNum; i<=currNum; i++) {
         // if single digit number
-        if (i > 9) {
-          int offsetX = (counter-9) * 20;
+        if (i > 10) {
+          int offsetX = 0;//(startingNum-9);
           numbers.add(new Number(str(i), counter*20+offsetX, false));
         } else {
           numbers.add(new Number(str(i), counter*20, false));
-        p}
+        }
         counter++;
       }
 
