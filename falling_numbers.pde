@@ -47,7 +47,9 @@ void draw(){
 
     // if currNum divisble by nine insert a break
     println("conditional statement" + str(currNum % 9 != 0 && startingNum == 1));
-    if (currNum % 9 != 0 && startingNum == 1) {
+    println("currNum " + str(currNum));
+    println("starting number" + str(startingNum));
+    if (currNum != 9 || startingNum != 1) {
       // add new row
       int counter = 0;
       for (int i=startingNum; i<=currNum; i++) {
@@ -57,7 +59,7 @@ void draw(){
           numbers.add(new Number(str(i), counter*20+offsetX, false));
         } else {
           numbers.add(new Number(str(i), counter*20, false));
-        }
+        p}
         counter++;
       }
 
@@ -65,7 +67,7 @@ void draw(){
       if (currNum % 3 == 0) {
         for (int i=0; i<3; i++) {
           // TODO fix issue adding in 11
-          if (currNum > 10) {
+          if (currNum >= 10) {
             xValue = numbers.get(numbers.size()-1).x + 40;
           } else {
             xValue += 20;
