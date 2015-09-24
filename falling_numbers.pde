@@ -25,10 +25,10 @@ void setup() {
   server = new SyphonServer(this, "Processing Spyhon");
 }
 
-void draw(){
+void draw() {
   // clear the screen to allow for animation
   background(0);
-  
+
   // increase the y value to make the numbers 'fall'
   for (Iterator<Number> iter = numbers.iterator (); iter.hasNext(); ) {
     Number num = iter.next();
@@ -46,9 +46,9 @@ void draw(){
     int currSize = numbers.size();
 
     // if currNum divisble by nine insert a break
-//    println("conditional statement" + str(currNum % 9 != 0 && startingNum == 1));
-//    println("currNum " + str(currNum));
-//    println("starting number" + str(startingNum));
+    //    println("conditional statement" + str(currNum % 9 != 0 && startingNum == 1));
+    //    println("currNum " + str(currNum));
+    println("starting number" + str(startingNum));
     if (!(currNum % 9 == 0 && currNum - startingNum > 2)) {
       // add new row
       int counter = 0;
@@ -56,7 +56,12 @@ void draw(){
         // if double digit number
         if (i > 10) {
           // offset non single digit numbers
-          int offsetX = (i-10) * 20;
+          int offsetX = 0;
+          if (startingNum > 10) {
+            offsetX = ((i-10)-(startingNum-10)) * 20;
+          } else {
+            offsetX = (i-10) * 20;
+          }
           numbers.add(new Number(str(i), counter*20+offsetX, false));
         } else {
           numbers.add(new Number(str(i), counter*20, false));
@@ -85,14 +90,14 @@ void draw(){
         xValue = 0;
         numbers.add(new Number(str(currNum), xValue, false));
         currNum++;
-        if(currNum > 10) {
+        if (currNum > 10) {
           xValue+=40;
         } else {
           xValue+=20;
         }
         numbers.add(new Number(str(currNum), xValue, false));
         currNum++;
-         if(currNum > 10) {
+        if (currNum > 10) {
           xValue+=40;
         } else {
           xValue+=20;
@@ -102,6 +107,7 @@ void draw(){
       } else {
         println("here");
         waiting = false;
+        // add in hidden number which creates space between rows
         numbers.add(new Number(str(0), 0, true));
       }
     }
