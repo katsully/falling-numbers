@@ -11,7 +11,7 @@ boolean waiting = true;
 SyphonServer server;
 
 void setup() {
-  size(400, 600, P2D);
+  size(600, 400, P2D);
   background(0);
   numbers.add(new Number(str(currNum), xValue, false));
   currNum++;
@@ -47,15 +47,16 @@ void draw(){
 
     // if currNum divisble by nine insert a break
 //    println("conditional statement" + str(currNum % 9 != 0 && startingNum == 1));
-    println("currNum " + str(currNum));
-    println("starting number" + str(startingNum));
+//    println("currNum " + str(currNum));
+//    println("starting number" + str(startingNum));
     if (currNum % 9 != 0 || startingNum != 1) {
       // add new row
       int counter = 0;
       for (int i=startingNum; i<=currNum; i++) {
         // if single digit number
         if (i > 10) {
-          int offsetX = 0;//(startingNum-9);
+          // offset non single digit numbers
+          int offsetX = (i-10) * 20;
           numbers.add(new Number(str(i), counter*20+offsetX, false));
         } else {
           numbers.add(new Number(str(i), counter*20, false));
