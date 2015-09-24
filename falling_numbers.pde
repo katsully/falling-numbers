@@ -49,11 +49,11 @@ void draw(){
 //    println("conditional statement" + str(currNum % 9 != 0 && startingNum == 1));
 //    println("currNum " + str(currNum));
 //    println("starting number" + str(startingNum));
-    if (currNum % 9 != 0 || startingNum != 1) {
+    if (!(currNum % 9 == 0 && currNum - startingNum > 2)) {
       // add new row
       int counter = 0;
       for (int i=startingNum; i<=currNum; i++) {
-        // if single digit number
+        // if double digit number
         if (i > 10) {
           // offset non single digit numbers
           int offsetX = (i-10) * 20;
@@ -80,15 +80,23 @@ void draw(){
     } else {
       println(waiting);
       if (!waiting) {
-        currNum = 7;
-        startingNum = 7;
+        currNum -=2;
+        startingNum = currNum;
         xValue = 0;
         numbers.add(new Number(str(currNum), xValue, false));
         currNum++;
-        xValue+=20;
+        if(currNum > 10) {
+          xValue+=40;
+        } else {
+          xValue+=20;
+        }
         numbers.add(new Number(str(currNum), xValue, false));
         currNum++;
-        xValue += 20;
+         if(currNum > 10) {
+          xValue+=40;
+        } else {
+          xValue+=20;
+        }
         numbers.add(new Number(str(currNum), xValue, false));
         waiting = true;
       } else {
