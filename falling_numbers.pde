@@ -9,6 +9,7 @@ boolean looping = true;
 boolean waiting = true;
 int numRows = 0;
 int rowsStop = 3;
+int firstRowNum = 3;  // how many numbers in the first row
 
 SyphonServer server;
 
@@ -48,13 +49,9 @@ void draw() {
     // get static copy of size so it won't be affected by adding to numbers
     int currSize = numbers.size();
 
-    // if currNum divisble by nine insert a break
-    //    println("conditional statement" + str(currNum % 9 != 0 && startingNum == 1));
-    //    println("currNum " + str(currNum));
-//    println("starting number" + str(startingNum));
     //    if (!(currNum % 9 == 0 && currNum - startingNum > 2)) {
-     println("number of rows " + str(numRows));
-     println("row stops " + str(rowsStop));
+    println("number of rows " + str(numRows));
+    println("row stops " + str(rowsStop));
     if (numRows != rowsStop) {
       // add new row
       int counter = 0;
@@ -89,9 +86,7 @@ void draw() {
         }
       }
       numRows++;
-//      println(numRows);
     } else {
-//      println(waiting);
       if (!waiting) {
         currNum -=2;
         startingNum = currNum;
@@ -113,9 +108,13 @@ void draw() {
         numbers.add(new Number(str(currNum), xValue, false));
         waiting = true;
         numRows = 1;
-        rowsStop++;
+        if (rowsStop == 5) {
+          rowsStop=3;
+          startingNum=11;
+        } else {
+          rowsStop++;
+        }
       } else {
-//        println("here");
         waiting = false;
         // add in hidden number which creates space between rows
         numbers.add(new Number(str(0), 0, true));
