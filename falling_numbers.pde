@@ -7,11 +7,13 @@ int currNum = 1;
 int startingNum = 1;
 boolean looping = true;
 boolean waiting = true;
+int numRows = 0;
+int rowsStop = 3;
 
 SyphonServer server;
 
 void setup() {
-  size(600, 400, P2D);
+  size(800, 400, P2D);
   background(0);
   numbers.add(new Number(str(currNum), xValue, false));
   currNum++;
@@ -20,6 +22,7 @@ void setup() {
   currNum++;
   xValue += 20;
   numbers.add(new Number(str(currNum), xValue, false));
+  numRows++;
 
   // Create syphon server to send frames out
   server = new SyphonServer(this, "Processing Spyhon");
@@ -48,8 +51,11 @@ void draw() {
     // if currNum divisble by nine insert a break
     //    println("conditional statement" + str(currNum % 9 != 0 && startingNum == 1));
     //    println("currNum " + str(currNum));
-    println("starting number" + str(startingNum));
-    if (!(currNum % 9 == 0 && currNum - startingNum > 2)) {
+//    println("starting number" + str(startingNum));
+    //    if (!(currNum % 9 == 0 && currNum - startingNum > 2)) {
+     println("number of rows " + str(numRows));
+     println("row stops " + str(rowsStop));
+    if (numRows != rowsStop) {
       // add new row
       int counter = 0;
       for (int i=startingNum; i<=currNum; i++) {
@@ -82,8 +88,10 @@ void draw() {
           currNum++;
         }
       }
+      numRows++;
+//      println(numRows);
     } else {
-      println(waiting);
+//      println(waiting);
       if (!waiting) {
         currNum -=2;
         startingNum = currNum;
@@ -104,8 +112,10 @@ void draw() {
         }
         numbers.add(new Number(str(currNum), xValue, false));
         waiting = true;
+        numRows = 1;
+        rowsStop++;
       } else {
-        println("here");
+//        println("here");
         waiting = false;
         // add in hidden number which creates space between rows
         numbers.add(new Number(str(0), 0, true));

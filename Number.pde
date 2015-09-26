@@ -11,7 +11,7 @@ class Number {
     if (hidden) {
       c = color(0,0,0);
     } else {
-      c = color(175, 175, 175);
+      c = color(175, 175, 175, 175);
     }
   }
   
