@@ -14,15 +14,9 @@ int firstRowNum = 3;  // how many numbers in the first row
 SyphonServer server;
 
 void setup() {
-  size(800, 400, P2D);
+  size(850, 400, P2D);
   background(0);
-  numbers.add(new Number(str(currNum), xValue, false));
-  currNum++;
-  xValue+=20;
-  numbers.add(new Number(str(currNum), xValue, false));
-  currNum++;
-  xValue += 20;
-  numbers.add(new Number(str(currNum), xValue, false));
+  displayFirstRow(firstRowNum, currNum, xValue);
   numRows++;
 
   // Create syphon server to send frames out
@@ -49,9 +43,6 @@ void draw() {
     // get static copy of size so it won't be affected by adding to numbers
     int currSize = numbers.size();
 
-    //    if (!(currNum % 9 == 0 && currNum - startingNum > 2)) {
-    println("number of rows " + str(numRows));
-    println("row stops " + str(rowsStop));
     if (numRows != rowsStop) {
       // add new row
       int counter = 0;
@@ -93,40 +84,16 @@ void draw() {
           firstRowNum=12;
         } else {
           rowsStop++;
-          if(firstRowNum == 12) {
+          if (firstRowNum == 12) {
             firstRowNum = 15;
           }
         }
         currNum -=2;
         startingNum = currNum;
         xValue = 0;
-        for(int i=0; i<=firstRowNum; i++) {
-          numbers.add(new Number(str(currNum), xValue, false));
-          if(i<firstRowNum-1){
-            currNum++;
-            if (currNum > 10) {
-              xValue+=40;
-            } else {
-              xValue+=20;
-            }
-          }
-//        numbers.add(new Number(str(currNum), xValue, false));
-//        currNum++;
-//        if (currNum > 10) {
-//          xValue+=40;
-//        } else {
-//          xValue+=20;
-//        }
-//        numbers.add(new Number(str(currNum), xValue, false));
-        }
+        displayFirstRow(firstRowNum, currNum, xValue);
         waiting = true;
         numRows = 1;
-//        if (rowsStop == 5) {
-//          rowsStop=3;
-//          firstRowNum=11;
-//        } else {
-//          rowsStop++;
-//        }
       } else {
         waiting = false;
         // add in hidden number which creates space between rows
@@ -136,6 +103,23 @@ void draw() {
   }
   server.sendScreen();
 }
+
+void displayFirstRow(int firstRow, int curr, int x) {
+  this.firstRowNum = firstRow;
+  this.currNum = curr;
+  this.xValue = x;
+  for (int i=0; i<=firstRowNum; i++) {
+    numbers.add(new Number(str(currNum), xValue, false));
+    if (i<firstRowNum-1) {
+      currNum++;
+      if (currNum > 10) {
+        xValue+=40;
+      } else {
+        xValue+=20;
+      }
+    }
+  }
+} 
 
 // hit P for pause
 void keyPressed() {
