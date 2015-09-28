@@ -93,6 +93,9 @@ void draw() {
           firstRowNum=12;
         } else {
           rowsStop++;
+          if(firstRowNum == 12) {
+            firstRowNum = 15;
+          }
         }
         currNum -=2;
         startingNum = currNum;
