@@ -7,7 +7,7 @@ int currNum = 1;
 int startingNum = 1;
 boolean looping = true;
 boolean waiting = true;
-int numRows = 0;
+int numRows = 1;
 int rowsStop = 3;
 int firstRowNum = 3;  // how many numbers in the first row
 
@@ -17,7 +17,6 @@ void setup() {
   size(850, 400, P2D);
   background(0);
   displayFirstRow(firstRowNum, currNum, xValue);
-  numRows++;
 
   // Create syphon server to send frames out
   server = new SyphonServer(this, "Processing Spyhon");
@@ -30,9 +29,7 @@ void draw() {
   // increase the y value to make the numbers 'fall'
   for (Iterator<Number> iter = numbers.iterator (); iter.hasNext(); ) {
     Number num = iter.next();
-    fill(num.c);
-    text(num.num, num.x, num.y);
-    num.y++;
+    num.fall();
     // if number falls off the screen remove from arraylist
     if (num.y > height) {
       iter.remove();
@@ -40,9 +37,6 @@ void draw() {
   }
 
   if (numbers.get(numbers.size()-1).y == 30) {
-    // get static copy of size so it won't be affected by adding to numbers
-    int currSize = numbers.size();
-
     if (numRows != rowsStop) {
       // add new row
       int counter = 0;
@@ -66,7 +60,6 @@ void draw() {
       // add three new number at end of line
       if (currNum % 3 == 0) {
         for (int i=0; i<3; i++) {
-          // TODO fix issue adding in 11
           if (currNum >= 10) {
             xValue = numbers.get(numbers.size()-1).x + 40;
           } else {
@@ -113,17 +106,17 @@ void draw() {
 }
 
 void displayFirstRow(int firstRow, int curr, int x) {
-  this.firstRowNum = firstRow;
-  this.currNum = curr;
-  this.xValue = x;
-  for (int i=0; i<=firstRowNum; i++) {
-    numbers.add(new Number(str(currNum), xValue, false));
-    if (i<firstRowNum-1) {
-      currNum++;
-      if (currNum > 10) {
-        xValue+=40;
+//  this.firstRowNum = firstRow;
+//  this.currNum = curr;
+//  this.xValue = x;
+  for (int i=0; i<=firstRow; i++) {
+    numbers.add(new Number(str(curr), x, false));
+    if (i<firstRow-1) {
+      curr++;
+      if (curr > 10) {
+        x+=40;
       } else {
-        xValue+=20;
+        x+=20;
       }
     }
   }
