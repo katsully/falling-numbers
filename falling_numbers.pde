@@ -88,32 +88,42 @@ void draw() {
       numRows++;
     } else {
       if (!waiting) {
-        currNum -=2;
-        startingNum = currNum;
-        xValue = 0;
-        numbers.add(new Number(str(currNum), xValue, false));
-        currNum++;
-        if (currNum > 10) {
-          xValue+=40;
-        } else {
-          xValue+=20;
-        }
-        numbers.add(new Number(str(currNum), xValue, false));
-        currNum++;
-        if (currNum > 10) {
-          xValue+=40;
-        } else {
-          xValue+=20;
-        }
-        numbers.add(new Number(str(currNum), xValue, false));
-        waiting = true;
-        numRows = 1;
         if (rowsStop == 5) {
           rowsStop=3;
-          startingNum=11;
+          firstRowNum=12;
         } else {
           rowsStop++;
         }
+        currNum -=2;
+        startingNum = currNum;
+        xValue = 0;
+        for(int i=0; i<=firstRowNum; i++) {
+          numbers.add(new Number(str(currNum), xValue, false));
+          if(i<firstRowNum-1){
+            currNum++;
+            if (currNum > 10) {
+              xValue+=40;
+            } else {
+              xValue+=20;
+            }
+          }
+//        numbers.add(new Number(str(currNum), xValue, false));
+//        currNum++;
+//        if (currNum > 10) {
+//          xValue+=40;
+//        } else {
+//          xValue+=20;
+//        }
+//        numbers.add(new Number(str(currNum), xValue, false));
+        }
+        waiting = true;
+        numRows = 1;
+//        if (rowsStop == 5) {
+//          rowsStop=3;
+//          firstRowNum=11;
+//        } else {
+//          rowsStop++;
+//        }
       } else {
         waiting = false;
         // add in hidden number which creates space between rows
