@@ -79,17 +79,25 @@ void draw() {
       numRows++;
     } else {
       if (!waiting) {
-        if (rowsStop == 5) {
+        if (rowsStop == 5 || (rowsStop == 3 && firstRowNum == 12)) {
           rowsStop=3;
-          firstRowNum=12;
-        } else {
-          rowsStop++;
           if (firstRowNum == 12) {
             firstRowNum = 15;
+          } else {
+            firstRowNum=12;
           }
+        } else {
+          rowsStop++;
         }
-        currNum -=2;
-        startingNum = currNum;
+        if (currNum == 63) {
+          currNum = 1;
+          startingNum = 1;
+          rowsStop = 3;
+          firstRowNum = 3;  // how many numbers in the first row
+        } else {
+          currNum -=2;
+          startingNum = currNum;
+        }
         xValue = 0;
         displayFirstRow(firstRowNum, currNum, xValue);
         waiting = true;
