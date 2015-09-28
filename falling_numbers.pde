@@ -86,7 +86,7 @@ void draw() {
           currNum = 1;
           startingNum = 1;
           rowsStop = 3;
-          firstRowNum = 3;  // how many numbers in the first row
+          firstRowNum = 3; 
         } else {
           currNum -=2;
           startingNum = currNum;
@@ -106,17 +106,17 @@ void draw() {
 }
 
 void displayFirstRow(int firstRow, int curr, int x) {
-//  this.firstRowNum = firstRow;
-//  this.currNum = curr;
-//  this.xValue = x;
-  for (int i=0; i<=firstRow; i++) {
-    numbers.add(new Number(str(curr), x, false));
-    if (i<firstRow-1) {
-      curr++;
-      if (curr > 10) {
-        x+=40;
+  this.firstRowNum = firstRow;
+  this.currNum = curr;
+  this.xValue = x;
+  for (int i=0; i<=firstRowNum; i++) {
+    numbers.add(new Number(str(currNum), xValue, false));
+    if (i<firstRowNum-1) {
+      currNum++;
+      if (currNum > 10) {
+        xValue+=40;
       } else {
-        x+=20;
+        xValue+=20;
       }
     }
   }
