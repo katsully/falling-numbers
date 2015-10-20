@@ -4,15 +4,11 @@ class Number {
   int x;
   color c;
 
-  Number(String num, int xValue, boolean hidden) {
+  Number(String num, int xValue) {
     textSize(28);
     this.num = num;
     this.x = xValue;
-    if (hidden) {
-      c = color(0, 0, 0);
-    } else {
-      c = color(175, 175, 175, 175);
-    }
+    c = color(175, 175, 175, 175);
   }
 
   void fall() {
