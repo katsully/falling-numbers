@@ -8,7 +8,7 @@ int currNum, startingNum, phraseLength, phraseGroups, phraseCounter;
 SyphonServer server;
 
 void setup() {
-  size(displayWidth, displayHeight, P2D);
+  size(1024, 768, P2D);
   background(0);
   reset();
   numbers.add(new Number(str(currNum), xValue));
@@ -56,7 +56,7 @@ void draw() {
     currNum = startingNum;
   }
   fill(0);
-  rect(150,150,width-250,height-300);
+  rect(225,150,width-450,height-300);
   server.sendScreen();
 }
 
