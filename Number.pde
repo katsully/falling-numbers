@@ -20,7 +20,7 @@ class Number {
     if (fallingDown) {
       y++;
     } else {
-      x++;
+      x--;
     }
   }
 }

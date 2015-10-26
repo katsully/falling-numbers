@@ -29,9 +29,8 @@ void draw() {
   for (Iterator<Number> iter = numbers.iterator (); iter.hasNext(); ) {
     Number num = iter.next();
     num.fall();
-    println("number: " + num.num + " x value " + num.x);
     // if number falls off the screen remove from arraylist
-    if (num.y > height || num.x > width) {
+    if (num.y > height || num.x < 0) {
       iter.remove();
     }
   }
@@ -41,9 +40,13 @@ void draw() {
       numbers.add(new Number(str(currNum), fallingDown, xValue, yValue));
     }
   } else {
-    if (numbers.get(numbers.size()-1).x == 30) {
+    if (numbers.get(numbers.size()-1).x == width-25) {
       currNum++;
-      numbers.add(new Number(str(currNum), fallingDown, xValue, yValue));
+      int newXValue = 0;
+      if (currNum > 10 && fallingDown == false) {
+        newXValue = 15;
+      }
+      numbers.add(new Number(str(currNum), fallingDown, xValue+newXValue, yValue));
     }
   }  
 
@@ -64,7 +67,6 @@ void draw() {
       phraseLength += 3;
       phraseCounter ++;
     }
-    //    xValue = (int)random(0, width-50);
     currNum = startingNum;
     if (fallingDown) {
       left = !left;
@@ -78,14 +80,14 @@ void draw() {
       } else {
         xValue = random(width-450, width);
       }
-       yValue = 0;
+      yValue = 0;
     } else {
       if (up) {
         yValue = random(150);
       } else {
         yValue = random(height-300, height);
       }
-      xValue = 0;
+      xValue = width;
     }
   }
   fill(0);
